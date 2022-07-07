@@ -7,5 +7,5 @@ function solve(inputText) {
     console.log(result.toUpperCase());
 }
 
-solve('Hi, h3ow are you?')
+solve('Hi, how are you?')
 solve('hello')
