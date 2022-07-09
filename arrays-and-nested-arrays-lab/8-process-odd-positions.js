@@ -6,7 +6,7 @@ function solve(arr) {
             result.push(arr[i] * 2);
         }
     }
-    console.log(result.reverse().join(" "));
+    return result.reverse().join(" ");
 }
 
 solve([10, 15, 20, 25]);
