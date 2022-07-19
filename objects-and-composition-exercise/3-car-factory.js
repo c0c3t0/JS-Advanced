@@ -4,13 +4,13 @@ function factory(order) {
         let engine = {};
         if (hp <= 90) {
             engine['power'] = 90;
-            engine.volume = 1800;
+            engine['volume'] = 1800;
         } else if (hp <= 120) {
-            engine.power = 120;
-            engine.volume = 2400;
+            engine['power'] = 120;
+            engine['volume'] = 2400;
         } else if (hp <= 200) {
-            engine.power = 200;
-            engine.volume = 3500;
+            engine['power'] = 200;
+            engine['volume'] = 3500;
         }
         return engine;
     }
