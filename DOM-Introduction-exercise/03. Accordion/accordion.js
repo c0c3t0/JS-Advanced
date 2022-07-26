@@ -9,6 +9,4 @@ function toggle() {
         buttonElement.textContent = "More";
         showMore.style.display = 'none';
     }
-
-    console.log('TODO:...');
 }
