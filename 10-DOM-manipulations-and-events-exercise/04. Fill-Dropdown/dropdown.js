@@ -4,9 +4,10 @@ function addItem() {
     let dropdownElement = document.querySelector('#menu');
 
     let optionElement = document.createElement('option');
-    optionElement.textContent = textInputElement.value + " " + valueInputElement.value;
+    optionElement.text = textInputElement.value;
+    optionElement.value = valueInputElement.value;
     dropdownElement.appendChild(optionElement);
     textInputElement.value = '';
     valueInputElement.value = '';
-    
+
 }
