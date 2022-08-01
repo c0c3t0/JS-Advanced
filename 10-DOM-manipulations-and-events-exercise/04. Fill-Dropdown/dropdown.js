@@ -7,6 +7,7 @@ function addItem() {
     optionElement.text = textInputElement.value;
     optionElement.value = valueInputElement.value;
     dropdownElement.appendChild(optionElement);
+    
     textInputElement.value = '';
     valueInputElement.value = '';
 
