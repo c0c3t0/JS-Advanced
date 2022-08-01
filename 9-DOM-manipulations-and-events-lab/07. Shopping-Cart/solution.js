@@ -34,6 +34,6 @@ function solve() {
    function checkoutHandler() {
       output = `You bought ${bought.join(', ')} for ${cost.toFixed(2)}.`;
       textarea.value += output;
-      Array.from(document.querySelectorAll('button')).forEach(x => x.disabled = true);
+      document.querySelectorAll('button').forEach(x => x.disabled = true);
    }
 }

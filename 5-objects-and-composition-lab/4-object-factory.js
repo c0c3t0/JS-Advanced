@@ -44,5 +44,5 @@ const library = {
       parts: ['play']
     }
   ];
-  const products = compose(library, orders);
+  const products = factory(library, orders);
   console.log(products);
