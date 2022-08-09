@@ -1,9 +1,7 @@
 function createFormatter(sep, sym, isFirst, formatterFunc) {
     let formatter = function (num) {
-        console.log(1);
         return formatterFunc(sep, sym, isFirst, num);
     }
-    console.log(2);
     return formatter;
 }
 
