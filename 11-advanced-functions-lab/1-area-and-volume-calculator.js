@@ -11,7 +11,7 @@ function solve(area, vol, input) {
         .map(x => ({
             area: area.call(x),
             volume: vol.call(x),
-        }))
+        }));
 }
 
 console.log(solve(area, vol, `[
