@@ -5,8 +5,7 @@ function filterEmployees(input, criteria) {
     data
         .filter(x => x[key] === value)
         .map((x, i) => `${i}. ${x.first_name} ${x.last_name} - ${x.email}`)
-        .forEach(x => console.log(x))
-    // console.log(result.join('\n'));
+        .forEach(x => console.log(x));
 }
 
 filterEmployees(`[{
