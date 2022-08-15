@@ -16,4 +16,4 @@ function argumentInfo() {
         .forEach(key => console.log(`${key} = ${info[key]}`));
 }
 
-argumentInfo('cat', 42, 44, 'fas', function () { console.log('Hello world!'); })
+argumentInfo('cat', 42, 44, function () { console.log('Hello world!'); })
