@@ -8,7 +8,7 @@ function getFibonator() {
         num1 = num2;
         num2 = result;
         return num1;
-    } 
+    }
 }
 
 let fib = getFibonator();

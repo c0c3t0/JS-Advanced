@@ -4,6 +4,7 @@ function argumentInfo() {
     for (let arg of arguments) {
         let type = typeof (arg);
         console.log(`${type}: ${arg}`);
+        
         if (!info[type]) {
             info[type] = 1;
         } else {
