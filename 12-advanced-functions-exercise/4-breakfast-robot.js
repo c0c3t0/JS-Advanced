@@ -26,14 +26,13 @@ function solution() {
                 let [key, value] = entry;
                 if (microelements[key] < value * quantity) {
                     return output = `Error: not enough ${key} in stock`;
-                    
+
                 }
             }
             for (let entry of entries) {
                 let [key, value] = entry;
                 if (microelements[key] -= value * quantity) {
                     output = "Success";
-                    
                 }
             }
         },
@@ -46,6 +45,7 @@ function solution() {
             output = reportOutput.join(" ");
         },
     }
+    
     return function manager(instructions) {
         let [command, microelementOrRecipe, quantity] = instructions.split(' ');
         quantity = Number(quantity);
@@ -69,15 +69,11 @@ let manager = solution();
 
 console.log(manager("prepare turkey 1"));
 console.log(manager("restock protein 10"));
-
 console.log(manager("prepare turkey 1"));
 console.log(manager("restock carbohydrate 10"));
-
 console.log(manager("prepare turkey 1"));
 console.log(manager("restock fat 10"));
-
 console.log(manager("prepare turkey 1"));
 console.log(manager("restock flavour 10"));
-
 console.log(manager("prepare turkey 1"));
 console.log(manager("report"));
