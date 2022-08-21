@@ -26,8 +26,8 @@ function solution(command) {
     }
 
     if (totalVotes > 50) {
-        let inflateVote = Math.ceil(Math.max(upvotes, downvotes) * 0.25);
-        return [upvotes + inflateVote, downvotes + inflateVote, balance, ratingState()];
+        let obfuscate = Math.ceil(Math.max(upvotes, downvotes) * 0.25);
+        return [upvotes + obfuscate, downvotes + obfuscate, balance, ratingState()];
     }
 
     return [upvotes, downvotes, balance, ratingState.call(this)];
@@ -46,7 +46,7 @@ let post = {
 //     id: '3',
 //     author: 'emil',
 //     content: 'wazaaaaa',
-//     upvotes: 9,
+//     upvotes: 0,
 //     downvotes: 0
 // };
 solution.call(post, 'upvote');
