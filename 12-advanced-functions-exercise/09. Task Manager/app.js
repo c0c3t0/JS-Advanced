@@ -9,7 +9,6 @@ function solve() {
     let inProgressSection = sections[2];
     let completeSection = sections[3];
 
-
     addButtonElement.addEventListener('click', addTask);
 
     function createElement(type, text, className) {
@@ -23,7 +22,7 @@ function solve() {
     }
 
     function addTask(e) {
-        e.preventDefault(); 
+        e.preventDefault();
 
         if (taskElement.value === '' || descriptionElement.value === '' || dateElement.value === '') {
             return;
@@ -38,11 +37,21 @@ function solve() {
         let startButton = createElement('button', 'Start', 'green');
         let deleteButton = createElement('button', 'Delete', 'red');
 
+        articleCreate.appendChild(h3Create);
+        articleCreate.appendChild(p1Create);
+        articleCreate.appendChild(p2Create);
+
+        divCreate.appendChild(startButton);
+        divCreate.appendChild(deleteButton);
+        articleCreate.appendChild(divCreate);
+
+        openSection.children[1].appendChild(articleCreate);
+        
         taskElement.value = '';
         descriptionElement.value = '';
         dateElement.value = '';
-        
-        startButton.addEventListener('click', (v) => {
+
+        startButton.addEventListener('click', () => {
             inProgressSection.children[1].appendChild(articleCreate);
             let finishButton = createElement('button', 'Finish', 'orange');
             divCreate.appendChild(finishButton);
@@ -50,26 +59,12 @@ function solve() {
 
             finishButton.addEventListener('click', () => {
                 completeSection.children[1].appendChild(articleCreate);
-                finishButton.remove();
-                deleteButton.remove();
+                divCreate.remove();
             })
         });
 
         deleteButton.addEventListener('click', () => {
             articleCreate.remove();
         });
-
-
-        articleCreate.appendChild(h3Create);
-        articleCreate.appendChild(p1Create);
-        articleCreate.appendChild(p2Create);
-
-        divCreate.appendChild(startButton);
-        divCreate.appendChild(deleteButton);
-
-        articleCreate.appendChild(divCreate);
-
-        openSection.appendChild(articleCreate);
-        
     }
 }
