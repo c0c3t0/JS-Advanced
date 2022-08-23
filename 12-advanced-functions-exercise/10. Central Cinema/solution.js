@@ -1,44 +1,48 @@
 function solve() {
-    let movie = document.querySelector('#container input:nth-of-type(1)');
-    let hall = document.querySelector('#container input:nth-of-type(2)');
-    let price = document.querySelector('#container input:nth-of-type(3)');
+    let movieElement = document.querySelector('#container input:nth-of-type(1)');
+    let hallElement = document.querySelector('#container input:nth-of-type(2)');
+    let priceElement = document.querySelector('#container input:nth-of-type(3)');
     let onScreenBtn = document.querySelector('#container button');
     let clearBtn = document.querySelector('#archive button');
 
-    let moviesOnScreen = document.querySelector('#movies');
-    let archive = document.querySelector('#archive');
+    let moviesOnScreen = document.querySelector('#movies ul');
+    let archive = document.querySelector('#archive ul');
 
-    function createElement(type, text, placeholder) {
+    function createElement(type, text) {
         let result = document.createElement(type);
         if (text) {
             result.textContent = text;
         }
-        if (placeholder) {
-            result.placeholder = placeholder;
-        }
-
         return result;
     }
 
     onScreenBtn.addEventListener('click', (e) => {
         e.preventDefault();
 
-        if (movie.value === '' || hall.value === '' || price.value === '') {
-            return;
-        }
-        if (!Number(price.value)) {
-            return;
-        }
+        let movie = movieElement.value;
+        let hall = hallElement.value;
+        let price = priceElement.value;
 
-        let ul = moviesOnScreen.children[1];
+        movieElement.value = '';
+        hallElement.value = '';
+        priceElement.value = '';
+
+        if (!movie || !hall) {
+            return;
+        }
+        if (price === '' || Number.isNaN(Number(price))) {
+            return;
+        }
+        price = Number(price);
 
         let li = createElement('li');
-        let span = createElement('span', movie.value);
-        let strong = createElement('strong', `Hall: ${hall.value}`);
+        let span = createElement('span', movie);
+        let strong = createElement('strong', `Hall: ${hall}`);
 
         let div = createElement('div');
-        let strongPrice = createElement('strong', Number(price.value).toFixed(2));
-        let inputSoldTickets = createElement('input', undefined, 'Tickets Sold');
+        let strongPrice = createElement('strong', price.toFixed(2));
+        let inputSoldTickets = createElement('input');
+        inputSoldTickets.placeholder = 'Tickets Sold';
         let archiveBtn = createElement('button', 'Archive');
 
         div.appendChild(strongPrice);
@@ -49,66 +53,34 @@ function solve() {
         li.appendChild(strong);
         li.appendChild(div);
 
-        ul.appendChild(li);
-
-        movie.value = '';
-        hall.value = '';
-        price.value = '';
+        moviesOnScreen.appendChild(li);       
 
         archiveBtn.addEventListener('click', (e) => {
             e.preventDefault();
 
-            // if (!Number(inputSoldTickets.value)) {
-            //     return;
-            // }
-            if (Number(inputSoldTickets.value) >= 0) {
-
-                let totalPrice = (Number(inputSoldTickets.value) * Number(strongPrice.textContent)).toFixed(2);
-                let archiveUl = archive.children[1];
-                let archiveLi = createElement('li');
-                let archiveSpan = createElement('span', span.textContent);
-                let archiveStrong = createElement('strong', `Total amount: ${totalPrice}`);
-                let deleteBtn = createElement('button', 'Delete');
-
-                archiveLi.appendChild(archiveSpan);
-                archiveLi.appendChild(archiveStrong);
-                archiveLi.appendChild(deleteBtn);
-                archiveUl.appendChild(archiveLi);
-
-                e.currentTarget.parentElement.parentElement.remove();
-
-                deleteBtn.addEventListener('click', (e) => {
-                    e.currentTarget.parentElement.remove();
-                })
-
-                clearBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-
-                    let allLi = e.currentTarget.parentElement.children[1].children;
-                    console.log(allLi);
-                    for (let li of allLi) {
-                        li.remove();
-                    }
-                })
+            if (inputSoldTickets.value === '' || Number.isNaN(Number(inputSoldTickets.value))) {
+                return;
             }
+
+            li.removeChild(strong);
+            li.removeChild(div);
+
+            let totalPrice = (Number(inputSoldTickets.value) * Number(strongPrice.textContent)).toFixed(2);
+            let archiveStrong = createElement('strong', `Total amount: ${totalPrice}`);
+            let deleteBtn = createElement('button', 'Delete');
+
+            li.appendChild(archiveStrong);
+            li.appendChild(deleteBtn);
+
+            archive.appendChild(li);
+
+            deleteBtn.addEventListener('click', () => {
+                li.remove();
+            })
+
+            clearBtn.addEventListener('click', () => {
+                archive.innerHTML = '';
+            })
         })
     })
-
 }
-
-
-document.querySelector("#container > input[type=text]:nth-child(1)").value = 'Avengers: Endgame';
-document.querySelector("#container > input[type=text]:nth-child(2)").value = 'Main';
-document.querySelector("#container > input[type=text]:nth-child(3)").value = '12.00';
-// click On Screen
-document.querySelector("#container > button").click();
-// fill input ticket count
-document.querySelector("#movies > ul > li > div > input").value = 0;
-// click Archive
-document.querySelector("#movies > ul > li > div > button").click(); 
-
-// Delete movie from archive functions;
-document.querySelector("#archive > ul > li > button").click();
-let archLiArr = Array.from(document.querySelector("#archive > ul").children);
-expect(archLiArr.length).to.be.equal(0,'The archived movie must be deleted from the archive ul'); 
- 
