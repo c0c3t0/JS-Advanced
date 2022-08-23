@@ -57,59 +57,58 @@ function solve() {
 
         archiveBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            console.log(inputSoldTickets.value === '0');
-            console.log(Number(inputSoldTickets.value));
-            if (inputSoldTickets.value === '0' || Number(inputSoldTickets.value)) {
-            
 
-            let totalPrice = (Number(inputSoldTickets.value) * Number(strongPrice.textContent)).toFixed(2);
-            let archiveUl = archive.children[1];
-            let archiveLi = createElement('li');
-            let archiveSpan = createElement('span', span.textContent);
-            let archiveStrong = createElement('strong', `Total amount: ${totalPrice}`);
-            let deleteBtn = createElement('button', 'Delete');
+            // if (!Number(inputSoldTickets.value)) {
+            //     return;
+            // }
+            if (Number(inputSoldTickets.value) >= 0) {
 
-            archiveLi.appendChild(archiveSpan);
-            archiveLi.appendChild(archiveStrong);
-            archiveLi.appendChild(deleteBtn);
-            archiveUl.appendChild(archiveLi);
+                let totalPrice = (Number(inputSoldTickets.value) * Number(strongPrice.textContent)).toFixed(2);
+                let archiveUl = archive.children[1];
+                let archiveLi = createElement('li');
+                let archiveSpan = createElement('span', span.textContent);
+                let archiveStrong = createElement('strong', `Total amount: ${totalPrice}`);
+                let deleteBtn = createElement('button', 'Delete');
 
-            e.currentTarget.parentElement.parentElement.remove();
-            console.log((document.querySelector('#movies > ul').children.length));
+                archiveLi.appendChild(archiveSpan);
+                archiveLi.appendChild(archiveStrong);
+                archiveLi.appendChild(deleteBtn);
+                archiveUl.appendChild(archiveLi);
 
-            deleteBtn.addEventListener('click', (e) => {
                 e.currentTarget.parentElement.parentElement.remove();
-            })
 
-            clearBtn.addEventListener('click', (e) => {
-                e.preventDefault();
+                deleteBtn.addEventListener('click', (e) => {
+                    e.currentTarget.parentElement.remove();
+                })
 
-                let allLi = e.currentTarget.parentElement.children[1].children;
-                console.log(allLi);
-                for (let li of allLi) {
-                    li.remove();
-                }
-            })
-        }
+                clearBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+
+                    let allLi = e.currentTarget.parentElement.children[1].children;
+                    console.log(allLi);
+                    for (let li of allLi) {
+                        li.remove();
+                    }
+                })
+            }
         })
     })
 
 }
 
-    // // fill inputs
-    // document.querySelector("#container > input[type=text]:nth-child(1)").value = 'Avengers: Endgame';
-    // document.querySelector("#container > input[type=text]:nth-child(2)").value = 'Main';
-    // document.querySelector("#container > input[type=text]:nth-child(3)").value = '12.00';
-    // // click On Screen
-    // document.querySelector("#container > button").click();
-    // // fill input ticket count
-    // document.querySelector("#movies > ul > li > div > input").value = 0;
-    // // click Archive
-    // document.querySelector("#movies > ul > li > div > button").click(); 
-    
-    // // Delete movie from archive functions;
-    // document.querySelector("#archive > ul > li > button").click();
-    // let archLiArr = Array.from(document.querySelector("#archive > ul").children);
-    // expect(archLiArr.length).to.be.equal(0,'The archived movie must be deleted from the archive ul'); 
-     
+
+document.querySelector("#container > input[type=text]:nth-child(1)").value = 'Avengers: Endgame';
+document.querySelector("#container > input[type=text]:nth-child(2)").value = 'Main';
+document.querySelector("#container > input[type=text]:nth-child(3)").value = '12.00';
+// click On Screen
+document.querySelector("#container > button").click();
+// fill input ticket count
+document.querySelector("#movies > ul > li > div > input").value = 0;
+// click Archive
+document.querySelector("#movies > ul > li > div > button").click(); 
+
+// Delete movie from archive functions;
+document.querySelector("#archive > ul > li > button").click();
+let archLiArr = Array.from(document.querySelector("#archive > ul").children);
+expect(archLiArr.length).to.be.equal(0,'The archived movie must be deleted from the archive ul'); 
  
