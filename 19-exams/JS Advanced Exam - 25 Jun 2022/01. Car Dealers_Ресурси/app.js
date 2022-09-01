@@ -1,8 +1,6 @@
 window.addEventListener("load", solve);
 
-function solve(e) {
-    e.preventDefault();
-
+function solve() {
     let makeInputElement = document.querySelector('#make');
     let modelInputElement = document.querySelector('#model');
     let yearInputElement = document.querySelector('#year');
@@ -13,9 +11,7 @@ function solve(e) {
 
     publishButtonElement.addEventListener('click', publishCar);
 
-    function publishCar(e) {
-        e.preventDefault();
-
+    function publishCar() {
         // Validations
         if (!makeInputElement.value || !modelInputElement.value
             || !yearInputElement.value || !fuelSelectElement.value
@@ -77,8 +73,7 @@ function solve(e) {
         }
 
         // Added edit button functionality
-        editButton.addEventListener('click', (e) => {
-            e.preventDefault();
+        editButton.addEventListener('click', () => {
 
             makeInputElement.value = tdMake.textContent;
             modelInputElement.value = tdModel.textContent;
@@ -90,9 +85,7 @@ function solve(e) {
         });
 
         // Added sell button functionality
-        sellButton.addEventListener('click', (e) => {
-            e.preventDefault();
-
+        sellButton.addEventListener('click', () => {
             let ulElement = document.querySelector('#cars-list');
 
             let liElement = htmlCreator('li');
@@ -110,28 +103,14 @@ function solve(e) {
             trElement.remove(e.target.parentNode.parentNode.children);
 
             let profitElement = document.querySelector('#profit');
-
             let profitElements = document.querySelectorAll('li span:nth-of-type(3)');
-            
+
             let profitMade = 0;
             for (let pr of profitElements) {
                 profitMade += Number(pr.textContent);
             }
 
-            profitElement.textContent = profitMade;
+            profitElement.textContent = profitMade.toFixed(2);
         })
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
