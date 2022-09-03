@@ -34,7 +34,7 @@ describe('bookSelection Tests', () => {
         });
     });
 
-    describe('suitableTitles(books, wantedGenre)', () => {
+    describe('suitableTitles(books, wantedGenre tests)', () => {
         it('should throw if input is invalid', () => {
             expect(() => { bookSelection.suitableTitles(4, '') }).to.throw('Invalid input');
             expect(() => { bookSelection.suitableTitles('4', '4') }).to.throw('Invalid input');
@@ -43,5 +43,20 @@ describe('bookSelection Tests', () => {
             expect(() => { bookSelection.suitableTitles('', true) }).to.throw('Invalid input');
             expect(() => { bookSelection.suitableTitles('', undefined) }).to.throw('Invalid input');
         });
+
+        it('should return properly if budget is highter than price', () => {
+            let arr = [
+                { title: "The Da Vinci Code", genre: "Thriller" },
+                { title: "The Da Vinci Code 2", genre: "Thriller" },
+                { title: "IT", genre: "Horror" },
+                { title: "IT 2", genre: "Horror" },
+                { title: "The Da Vinci Code 3", genre: "Thriller" }];
+
+            let wanted = 'Horror'
+            let wanted2 = 'Comedy'
+            expect(bookSelection.suitableTitles(arr, wanted)).to.deep.equal(['IT', 'IT 2']);
+            expect(bookSelection.suitableTitles(arr, wanted2)).to.deep.equal([]);
+        });
+
     });
 })
