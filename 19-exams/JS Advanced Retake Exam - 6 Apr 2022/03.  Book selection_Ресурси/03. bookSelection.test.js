@@ -1,4 +1,4 @@
-const {expect} = require('chai');
+const { expect } = require('chai');
 const bookSelection = require('./03. bookSelection');
 
 describe('bookSelection Tests', () => {
@@ -13,4 +13,24 @@ describe('bookSelection Tests', () => {
             expect(bookSelection.isGenreSuitable('Comedy', 12)).to.equal('Those books are suitable');
         });
     });
+
+    describe('isItAffordable(price, budget)) tests', () => {
+        it('should throw if input is invalid', () => {
+            expect(() => {bookSelection.isItAffordable('', '')}).to.throw('Invalid input');
+            expect(() => {bookSelection.isItAffordable('4', '4')}).to.throw('Invalid input');
+            expect(() => {bookSelection.isItAffordable('', [])}).to.throw('Invalid input');
+            expect(() => {bookSelection.isItAffordable('', {})}).to.throw('Invalid input');
+            expect(() => {bookSelection.isItAffordable('', true)}).to.throw('Invalid input');
+            expect(() => {bookSelection.isItAffordable('', undefined)}).to.throw('Invalid input');
+        });
+
+        it('should return properly if price is highter than budget', () => {
+            expect(bookSelection.isItAffordable(100, 0)).to.equal("You don't have enough money");
+            expect(bookSelection.isItAffordable(100, 99)).to.equal("You don't have enough money");
+        });
+
+        it('should return properly if budget is highter than price', () => {
+            expect(bookSelection.isItAffordable(100, 100)).to.equal('Book bought. You have 0$ left');
+        });
+    })
 })
