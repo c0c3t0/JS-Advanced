@@ -16,12 +16,12 @@ describe('bookSelection Tests', () => {
 
     describe('isItAffordable(price, budget)) tests', () => {
         it('should throw if input is invalid', () => {
-            expect(() => {bookSelection.isItAffordable('', '')}).to.throw('Invalid input');
-            expect(() => {bookSelection.isItAffordable('4', '4')}).to.throw('Invalid input');
-            expect(() => {bookSelection.isItAffordable('', [])}).to.throw('Invalid input');
-            expect(() => {bookSelection.isItAffordable('', {})}).to.throw('Invalid input');
-            expect(() => {bookSelection.isItAffordable('', true)}).to.throw('Invalid input');
-            expect(() => {bookSelection.isItAffordable('', undefined)}).to.throw('Invalid input');
+            expect(() => { bookSelection.isItAffordable('', '') }).to.throw('Invalid input');
+            expect(() => { bookSelection.isItAffordable('4', '4') }).to.throw('Invalid input');
+            expect(() => { bookSelection.isItAffordable('', []) }).to.throw('Invalid input');
+            expect(() => { bookSelection.isItAffordable('', {}) }).to.throw('Invalid input');
+            expect(() => { bookSelection.isItAffordable('', true) }).to.throw('Invalid input');
+            expect(() => { bookSelection.isItAffordable('', undefined) }).to.throw('Invalid input');
         });
 
         it('should return properly if price is highter than budget', () => {
@@ -32,5 +32,16 @@ describe('bookSelection Tests', () => {
         it('should return properly if budget is highter than price', () => {
             expect(bookSelection.isItAffordable(100, 100)).to.equal('Book bought. You have 0$ left');
         });
-    })
+    });
+
+    describe('suitableTitles(books, wantedGenre)', () => {
+        it('should throw if input is invalid', () => {
+            expect(() => { bookSelection.suitableTitles(4, '') }).to.throw('Invalid input');
+            expect(() => { bookSelection.suitableTitles('4', '4') }).to.throw('Invalid input');
+            expect(() => { bookSelection.suitableTitles('', []) }).to.throw('Invalid input');
+            expect(() => { bookSelection.suitableTitles('', {}) }).to.throw('Invalid input');
+            expect(() => { bookSelection.suitableTitles('', true) }).to.throw('Invalid input');
+            expect(() => { bookSelection.suitableTitles('', undefined) }).to.throw('Invalid input');
+        });
+    });
 })
