@@ -51,16 +51,10 @@ class LibraryCollection {
             if (!this.books.find(book => book.bookAuthor === bookAuthor)) {
                 throw new Error(`${bookAuthor} is not in the collection.`);
             }
-            // let result = '';
-
-            let result = this.books.filter(book => book.bookAuthor === bookAuthor)
-                .map(book => { `${book['bookName']} == ${book.bookAuthor} - ${book.payed ? 'Has Paid' : 'Not Paid'}.\n` });
+            let result = '';
+            this.books.filter(book => book.bookAuthor === bookAuthor)
+                .map(book => { result += `${book['bookName']} == ${book.bookAuthor} - ${book.payed ? 'Has Paid' : 'Not Paid'}.\n` });
             return result.trim();
         }
     }
-    //
 }
-
-const library = new LibraryCollection(2)
-console.log(library.addBook('Don Quixote', 'Miguel de Cervantes'));
-console.log(library.getStatistics('Miguel de Cervantes'));
