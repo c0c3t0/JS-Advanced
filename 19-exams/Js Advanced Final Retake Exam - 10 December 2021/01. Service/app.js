@@ -24,7 +24,6 @@ function solve() {
             addInfo(e, type.value, name.value, phone.value, description.value);
             clearInputs();
         }
-
     }
 
     function addInfo(e, type, name, phone, description) {
