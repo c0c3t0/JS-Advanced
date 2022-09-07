@@ -7,9 +7,11 @@ describe('companyAdministration tests', () => {
             expect(() => { companyAdministration.hiringEmployee('', '', 1) }).to.throw(`We are not looking for workers for this position.`);
 
         });
+
         it('expect successs if experience is greater than 2', () => {
             expect(companyAdministration.hiringEmployee('pesho', 'Programmer', 3)).to.equal('pesho was successfully hired for the position Programmer.')
         });
+
         it('expect proper message when experience is less than 3', () => {
             expect(companyAdministration.hiringEmployee('pesho', 'Programmer', 2)).to.equal('pesho is not approved for this position.');
         });
@@ -32,31 +34,30 @@ describe('companyAdministration tests', () => {
             expect(companyAdministration.calculateSalary(160)).to.equal(2400);
             expect(companyAdministration.calculateSalary(161)).to.equal(3415);
         });
-        it('', () => {
-
-        });
-        it('', () => {
-
-        });
-
 
     });
 
     describe('firedEmployee(employees, index) tests', () => {
-        it('', () => {
+        it('should throw if input is invalid', () => {
+            expect(() => { companyAdministration.firedEmployee('', 1) }).to.throw('Invalid input');
+            expect(() => { companyAdministration.firedEmployee({}, 1) }).to.throw('Invalid input');
+            expect(() => { companyAdministration.firedEmployee(undefined, 1) }).to.throw('Invalid input');
+            expect(() => { companyAdministration.firedEmployee(true, 1) }).to.throw('Invalid input');
+            expect(() => { companyAdministration.firedEmployee(1, 1) }).to.throw('Invalid input');
 
+            expect(() => { companyAdministration.firedEmployee([], '') }).to.throw('Invalid input');
+            expect(() => { companyAdministration.firedEmployee([], []) }).to.throw('Invalid input');
+            expect(() => { companyAdministration.firedEmployee([], {}) }).to.throw('Invalid input');
+            expect(() => { companyAdministration.firedEmployee([], undefined) }).to.throw('Invalid input');
+            expect(() => { companyAdministration.firedEmployee([], true) }).to.throw('Invalid input');
+            expect(() => { companyAdministration.firedEmployee([], 1.4) }).to.throw('Invalid input');
+            expect(() => { companyAdministration.firedEmployee([], -1) }).to.throw('Invalid input');
+            expect(() => { companyAdministration.firedEmployee(['1', '2', '3'], 3) }).to.throw('Invalid input');
         });
 
-        it('', () => {
-
+        it('should remove an element from given index', () => {
+            expect(companyAdministration.firedEmployee(["Petar", "Ivan", "George"], 1)).to.equal('Petar, George')
         });
-        it('', () => {
-
-        });
-        it('', () => {
-
-        });
-
 
     });
 })
