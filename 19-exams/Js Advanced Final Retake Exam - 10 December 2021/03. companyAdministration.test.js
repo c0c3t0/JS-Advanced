@@ -17,11 +17,20 @@ describe('companyAdministration tests', () => {
     });
 
     describe('calculateSalary(hours) tests', () => {
-        it('', () => {
-
+        it('shoud throw an erroe if input is invalid', () => {
+            expect(() => companyAdministration.calculateSalary('')).to.throw('Invalid hours')
+            expect(() => companyAdministration.calculateSalary('3')).to.throw('Invalid hours')
+            expect(() => companyAdministration.calculateSalary(-3)).to.throw('Invalid hours')
+            expect(() => companyAdministration.calculateSalary([])).to.throw('Invalid hours')
+            expect(() => companyAdministration.calculateSalary({})).to.throw('Invalid hours')
+            expect(() => companyAdministration.calculateSalary(undefined)).to.throw('Invalid hours')
         });
-        it('', () => {
 
+        it('should return correct total amount', () => {
+            expect(companyAdministration.calculateSalary(10)).to.equal(150);
+            expect(companyAdministration.calculateSalary(10.5)).to.equal(157.5);
+            expect(companyAdministration.calculateSalary(160)).to.equal(2400);
+            expect(companyAdministration.calculateSalary(161)).to.equal(3415);
         });
         it('', () => {
 
