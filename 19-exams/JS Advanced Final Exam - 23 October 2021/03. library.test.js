@@ -34,7 +34,20 @@ describe('library tests', () => {
     });
 
     describe('findBook: function(booksArr, desiredBook)', () => {
-        it('', () => {
+        it('should throw an error if booksArr is empty', () => {
+            expect(() => { library.findBook([], '') }).to.throw('No books currently available');
+            expect(() => { library.findBook([], 'book') }).to.throw('No books currently available');
+        });
+
+        it('should return a proper message if book is not in the library', () => {
+            expect(library.findBook(["Troy", "Life Style", "Torronto"], 'book')).to.equal('The book you are looking for is not here!');
+            expect(library.findBook(["Troy", "Life Style", "Torronto"], 'torronto')).to.equal('The book you are looking for is not here!');
+
+        });
+
+        it('should return a proper message if book is in the library', () => {
+            expect(library.findBook(["Troy", "Life Style", "Torronto"], 'Troy')).to.equal('We found the book you want.');
+            expect(library.findBook(["Troy", "Life Style", "Torronto"], 'Torronto')).to.equal('We found the book you want.');
 
         });
     });
