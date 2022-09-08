@@ -7,7 +7,8 @@ function solve() {
     let date = document.querySelector('#date');
     let addBtn = document.querySelector('#add-btn');
     let div = document.querySelector('.all-hits-container');
-    // let  = document.querySelector('#')
+    let totalLikes = document.querySelector('#total-likes div p');
+    let divSavedSongs = document.querySelector('.saved-container');
 
     addBtn.addEventListener('click', add);
 
@@ -32,16 +33,27 @@ function solve() {
 
         let saveSongBtn = htmlGenerator('button', 'Save song', divHitsInfo);
         saveSongBtn.setAttribute('class', 'save-btn');
+        saveSongBtn.addEventListener('click', (e) => {
+            e.target.parentNode.remove();
+            divHitsInfo.removeChild(saveSongBtn);
+            divHitsInfo.removeChild(likeSongBtn);
+            divSavedSongs.appendChild(divHitsInfo);
+        })
 
         let likeSongBtn = htmlGenerator('button', 'Like song', divHitsInfo);
         likeSongBtn.setAttribute('class', 'like-btn');
+        likeSongBtn.addEventListener('click', (e) => {
+            let likes = Number(totalLikes.textContent.split('Total Likes: ')[1]);
+            totalLikes.textContent = `Total Likes: ${Number(likes) + 1}`;
+            likeSongBtn.setAttribute('disabled', 'disabled');
+        });
 
         let deleteBtn = htmlGenerator('button', 'Delete', divHitsInfo);
         deleteBtn.setAttribute('class', 'delete-btn');
-
+        deleteBtn.addEventListener('click', (e) => {
+            e.target.parentNode.remove();
+        })
     }
-
-
 
     function htmlGenerator(tagName, content, parent) {
         let el = document.createElement(tagName);
@@ -58,7 +70,4 @@ function solve() {
         author.value = '';
         date.value = '';
     }
-
 }
-
-
