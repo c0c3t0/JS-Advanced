@@ -109,23 +109,17 @@ describe('String Builder Tests', () => {
             expect(obj.toString()).to.equal('012e6');
             obj.remove(0, 3);
             expect(obj.toString()).to.equal('e6');
-
         });
     });
 
     describe('tetss the whole functionality', () => {
         it('should append, prepend, append at given index and remove', () => {
-            const obj = new StringBuilder('12');
-            obj.prepend('0');
-            obj.append('6');
-            obj.insertAt('345', 3)
-            expect(obj.toString()).to.equal('0123456');
-            obj.remove(1, 2);
-            expect(obj.toString()).to.equal('03456');
-            obj.prepend('-1');
-            obj.append('7');
-            obj.insertAt('12', 3);
-            expect(obj.toString()).to.equal('-101234567');
-        })
+            const obj = new StringBuilder('asd');
+            obj.append('erty');
+            obj.prepend('qw');
+            obj.insertAt('123', 2);
+            obj.remove(5, 3);
+            expect(obj.toString()).to.equal('qw123erty');
+        });
     });
 });
