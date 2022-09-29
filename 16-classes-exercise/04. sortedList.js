@@ -1,7 +1,7 @@
 class List {
     constructor() {
         this.list = [];
-        this.size = this.list.lenght;
+        this.size = this.list.length;
     }
 
     add(element) {
