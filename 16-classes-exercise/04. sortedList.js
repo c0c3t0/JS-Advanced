@@ -6,7 +6,7 @@ class List {
 
     add(element) {
         this.list.push(Number(element));
-        this.list = this.list.sort((a, b) => a - b);
+        this.list.sort((a, b) => a - b);
         this.size = this.list.length;
     }
 
@@ -15,7 +15,7 @@ class List {
             throw new Error('Index out of range');
         }
         this.list.splice(index, 1);
-        this.list = this.list.sort((a, b) => a - b);
+        this.list.sort((a, b) => a - b);
         this.size = this.list.length;
     }
 
