@@ -1,10 +1,7 @@
 function solution() {
-    document.querySelector('button').addEventListener('click', addGift);
     const input = document.querySelector('input');
-
+    document.querySelector('button').addEventListener('click', addGift);
     const listOfGiftsUl = document.querySelectorAll('section')[1].children[1];
-    const sentGiftsUl = document.querySelectorAll('section')[2].children[1];
-    const discardedGiftsUl = document.querySelectorAll('section')[3].children[1];
 
     function addGift(e) {
         e.preventDefault();
@@ -16,7 +13,6 @@ function solution() {
         const discardBtn = htmlGenerator('button', 'Discard', li, '', 'discardButton');
         discardBtn.addEventListener('click', discardGift);
 
-
         Array.from(listOfGiftsUl.querySelectorAll('li'))
             .sort((a, b) => a.textContent.localeCompare(b.textContent))
             .forEach(x => {
@@ -26,14 +22,18 @@ function solution() {
     }
 
     function sendGift(e) {
+        const sentGiftsUl = document.querySelectorAll('section')[2].children[1];
         const currentGift = e.target.parentNode;
+
         sentGiftsUl.appendChild(currentGift);
         currentGift.querySelector('#sendButton').remove();
         currentGift.querySelector('#discardButton').remove();
     }
 
     function discardGift(e) {
+        const discardedGiftsUl = document.querySelectorAll('section')[3].children[1];
         const currentGift = e.target.parentNode;
+
         discardedGiftsUl.appendChild(currentGift);
         currentGift.querySelector('#sendButton').remove();
         currentGift.querySelector('#discardButton').remove();
