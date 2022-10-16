@@ -1,17 +1,7 @@
-const { expect, assert } = require('chai');
+const { expect } = require('chai');
 const { Repository } = require("./02. repository.js");
 
 describe("Repository Tests", () => {
-    // let repo = undefined;
-    // let props = { name: 'string', age: 'number', birthday: "object" };
-    // entity = { name: 'Kiko', age: 26, birthday: new Date(1995, 13, 08) };
-    
-    // beforeEach(function () {
-    //     repo = new Repository(props);
-    // });
-
- 
-
     describe("constructor(props) test", () => {
         it("should work properly", () => {
             let info = {
@@ -181,11 +171,7 @@ describe("Repository Tests", () => {
             repo.update(0, newEntity);
             expect(repo.getId(0)).to.deep.equal({ name: 'Gosho', age: 22, "birthday": new Date(1998, 0, 7) });
         });
-        // describe("Update", function () {
-        //     // it("Should throw an error if we are trying to update info on a non-existent index", function () {
-        //     //     assert.throws(function () { repo.update(0, { name: 'test' }) }, Error, `Entity with id: 0 does not exist!`);
-        //     // });
-        // });
+
         it('should throw if no such id', () => {
             let properties = {
                 name: "string",
@@ -209,7 +195,7 @@ describe("Repository Tests", () => {
 
             expect(() => { repo.update(1, newEntity) }).to.throw('Entity with id: 1 does not exist!');
         });
-    
+
         it("should throw if some data is missing", () => {
             let properties = {
                 name: "string",
@@ -285,7 +271,7 @@ describe("Repository Tests", () => {
         });
     });
 
-    
+
 
     describe('del(id)', () => {
         it('should delete person\'s info', () => {
@@ -336,7 +322,7 @@ describe("Repository Tests", () => {
 
             expect(info).to.deep.equal({ name: 'Pesho', age: 22, birthday: new Date(1998, 0, 7) });
             expect(repo.data.get(0)).to.be.undefined;
-   
+
         });
 
         it('should throw if no such id', () => {
