@@ -25,7 +25,7 @@ function solution() {
         input.value = '';
     }
 
-    function sendGift(e){
+    function sendGift(e) {
         const currentGift = e.target.parentNode;
         sentGiftsUl.appendChild(currentGift);
         currentGift.querySelector('#sendButton').remove();
