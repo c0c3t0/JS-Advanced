@@ -1,7 +1,17 @@
-const { expect } = require('chai');
+const { expect, assert } = require('chai');
 const { Repository } = require("./02. repository.js");
 
 describe("Repository Tests", () => {
+    // let repo = undefined;
+    // let props = { name: 'string', age: 'number', birthday: "object" };
+    // entity = { name: 'Kiko', age: 26, birthday: new Date(1995, 13, 08) };
+    
+    // beforeEach(function () {
+    //     repo = new Repository(props);
+    // });
+
+ 
+
     describe("constructor(props) test", () => {
         it("should work properly", () => {
             let info = {
@@ -39,7 +49,16 @@ describe("Repository Tests", () => {
                 birthday: new Date(1998, 0, 7)
             };
 
-            expect(() => repo.add(entity)).to.throw(`Property name is missing from the entity!`)
+            expect(() => repo.add(entity)).to.throw(`Property name is missing from the entity!`);
+
+            let entity2 = {
+                name: "Pesho",
+                // age: 22,
+                birthday: new Date(1998, 0, 7)
+            };
+
+            expect(() => repo.add(entity2)).to.throw(`Property age is missing from the entity!`);
+
         });
 
         it("should throw if data type is not correct", () => {
@@ -56,7 +75,21 @@ describe("Repository Tests", () => {
                 birthday: new Date(1998, 0, 7)
             };
 
-            expect(() => repo.add(entity)).to.throw('Property name is not of correct type!')
+            expect(() => repo.add(entity)).to.throw('Property name is not of correct type!');
+
+            let entity2 = {
+                name: 'Pesho',
+                age: '22',
+                birthday: new Date(1998, 0, 7)
+            };
+            expect(() => repo.add(entity2)).to.throw('Property age is not of correct type!');
+
+            let entity3 = {
+                name: 'Pesho',
+                age: 22,
+                birthday: ''
+            };
+            expect(() => repo.add(entity3)).to.throw('Property birthday is not of correct type!');
         });
 
         it("should return proper id", () => {
@@ -76,6 +109,9 @@ describe("Repository Tests", () => {
             expect(repo.add(entity)).to.equal(0);
             expect(repo.add(entity)).to.equal(1);
 
+            let info = repo.data.get(0);
+
+            expect(info).to.deep.equal({ name: 'Pesho', age: 22, birthday: new Date(1998, 0, 7) });
         });
     });
 
@@ -97,6 +133,7 @@ describe("Repository Tests", () => {
             expect(repo.add(entity)).to.equal(0);
             expect(repo.add(entity)).to.equal(1);
 
+            expect(repo.getId(0)).to.deep.equal({ name: 'Pesho', age: 22, "birthday": new Date(1998, 0, 7) });
             expect(repo.getId(1)).to.deep.equal({ name: 'Pesho', age: 22, "birthday": new Date(1998, 0, 7) });
         });
 
@@ -116,7 +153,210 @@ describe("Repository Tests", () => {
 
             expect(repo.add(entity)).to.equal(0);
 
-            expect(() => {repo.getId(1)}).to.throw('Entity with id: 1 does not exist!');
-        })
-    })
+            expect(() => { repo.getId(1) }).to.throw('Entity with id: 1 does not exist!');
+        });
+    });
+
+    describe('update(id, newEntity)', () => {
+        it('should update person\'s info', () => {
+            let properties = {
+                name: "string",
+                age: "number",
+                birthday: "object"
+            };
+            let repo = new Repository(properties);
+
+            let entity = {
+                name: 'Pesho',
+                age: 22,
+                birthday: new Date(1998, 0, 7)
+            };
+            let newEntity = {
+                name: 'Gosho',
+                age: 22,
+                birthday: new Date(1998, 0, 7)
+            };
+
+            expect(repo.add(entity)).to.equal(0);
+            repo.update(0, newEntity);
+            expect(repo.getId(0)).to.deep.equal({ name: 'Gosho', age: 22, "birthday": new Date(1998, 0, 7) });
+        });
+        // describe("Update", function () {
+        //     // it("Should throw an error if we are trying to update info on a non-existent index", function () {
+        //     //     assert.throws(function () { repo.update(0, { name: 'test' }) }, Error, `Entity with id: 0 does not exist!`);
+        //     // });
+        // });
+        it('should throw if no such id', () => {
+            let properties = {
+                name: "string",
+                age: "number",
+                birthday: "object"
+            };
+            let repo = new Repository(properties);
+
+            let entity = {
+                name: 'Pesho',
+                age: 22,
+                birthday: new Date(1998, 0, 7)
+            };
+            let newEntity = {
+                name: 'Pesho',
+                age: '22',
+                birthday: new Date(1998, 0, 7)
+            };
+
+            expect(repo.add(entity)).to.equal(0);
+
+            expect(() => { repo.update(1, newEntity) }).to.throw('Entity with id: 1 does not exist!');
+        });
+    
+        it("should throw if some data is missing", () => {
+            let properties = {
+                name: "string",
+                age: "number",
+                birthday: "object"
+            };
+            let repo = new Repository(properties);
+
+            let entity = {
+                name: "Pesho",
+                age: 22,
+                birthday: new Date(1998, 0, 7)
+            };
+            let newEntity = {
+                // name: 'Pesho',
+                age: '22',
+                birthday: new Date(1998, 0, 7)
+            };
+
+            repo.add(entity);
+
+            expect(() => repo.add(newEntity)).to.throw(`Property name is missing from the entity!`);
+        });
+
+        it("should throw if data type is not correct", () => {
+            let properties = {
+                name: "string",
+                age: "number",
+                birthday: "object"
+            };
+            let repo = new Repository(properties);
+
+            let entity = {
+                name: 'Pesho',
+                age: 22,
+                birthday: new Date(1998, 0, 7)
+            };
+            let newEntity = {
+                name: 'Pesho',
+                age: '22',
+                birthday: new Date(1998, 0, 7)
+            };
+            expect(repo.add(entity)).to.equal(0);
+            expect(() => repo.update(0, newEntity)).to.throw('Property age is not of correct type!')
+
+            let newEntity2 = {
+                name: 'Pesho',
+                age: 22,
+                birthday: undefined
+            };
+            expect(() => repo.update(0, newEntity2)).to.throw('Property birthday is not of correct type!')
+
+        });
+
+
+        it('should throw if no such id', () => {
+            let properties = {
+                name: "string",
+                age: "number",
+                birthday: "object"
+            };
+            let repo = new Repository(properties);
+
+            let entity = {
+                name: 'Pesho',
+                age: 22,
+                birthday: new Date(1998, 0, 7)
+            };
+
+            expect(repo.add(entity)).to.equal(0);
+
+            expect(() => { repo.getId(1) }).to.throw('Entity with id: 1 does not exist!');
+        });
+    });
+
+    
+
+    describe('del(id)', () => {
+        it('should delete person\'s info', () => {
+            let properties = {
+                name: "string",
+                age: "number",
+                birthday: "object"
+            };
+            let repo = new Repository(properties);
+
+            let entity = {
+                name: 'Pesho',
+                age: 22,
+                birthday: new Date(1998, 0, 7)
+            };
+            let newEntity = {
+                name: 'Gosho',
+                age: 22,
+                birthday: new Date(1998, 0, 7)
+            };
+
+            expect(repo.add(entity)).to.equal(0);
+            expect(repo.add(newEntity)).to.equal(1);
+            repo.del(1);
+            expect(repo.getId(0)).to.deep.equal({ name: 'Pesho', age: 22, "birthday": new Date(1998, 0, 7) });
+            expect(() => { repo.getId(1) }).to.throw('Entity with id: 1 does not exist!');
+        });
+
+        it("Should delete the entity at the given index", function () {
+            let properties = {
+                name: "string",
+                age: "number",
+                birthday: "object"
+            };
+            let repo = new Repository(properties);
+
+            let entity = {
+                name: 'Pesho',
+                age: 22,
+                birthday: new Date(1998, 0, 7)
+            };
+            repo.add(entity);
+            repo.add(entity);
+            repo.del(0);
+
+            expect(repo.count).to.equal(1);
+            let info = repo.data.get(1);
+
+            expect(info).to.deep.equal({ name: 'Pesho', age: 22, birthday: new Date(1998, 0, 7) });
+            expect(repo.data.get(0)).to.be.undefined;
+   
+        });
+
+        it('should throw if no such id', () => {
+            let properties = {
+                name: "string",
+                age: "number",
+                birthday: "object"
+            };
+            let repo = new Repository(properties);
+
+            let entity = {
+                name: 'Pesho',
+                age: 22,
+                birthday: new Date(1998, 0, 7)
+            };
+
+            expect(repo.add(entity)).to.equal(0);
+
+            expect(() => { repo.del(1) }).to.throw('Entity with id: 1 does not exist!');
+            expect(() => { repo.del(-1) }).to.throw('Entity with id: -1 does not exist!');
+        });
+    });
 });
