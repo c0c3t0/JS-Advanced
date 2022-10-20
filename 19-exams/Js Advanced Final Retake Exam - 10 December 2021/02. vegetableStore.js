@@ -24,7 +24,6 @@ class VegetableStore {
         });
 
         let added = this.availableProducts.map(el => el.type);
-        // added = new Set(added);
         return `Successfully added ${added.join(', ')}`
     }
 
@@ -65,33 +64,11 @@ class VegetableStore {
     }
 
     revision() {
-        let result = "Available vegetables:\n";
+        let result = ["Available vegetables:"];
         this.availableProducts.sort((a, b) => a.price - b.price)
-            .map(x => result += `${x.type}-${x.quantity}-$${x.price}\n`);
-        result += `The owner of the store is ${this.owner}, and the location is ${this.location}.`;
+            .map(x => result.push(`${x.type}-${x.quantity}-$${x.price}`));
+        result.push(`The owner of the store is ${this.owner}, and the location is ${this.location}.`);
 
-        return result;
+        return result.join('\n');
     }
 }
-
-// let vegStore = new VegetableStore("Jerrie Munro", "1463 Pette Kyosheta, Sofia");
-// console.log(vegStore.loadingVegetables(["Okra 2.5 3.5", "Beans 10 2.8", "Celery 5.5 2.2", "Celery 0.5 2.5"]));
-
-// let vegStore = new VegetableStore("Jerrie Munro", "1463 Pette Kyosheta, Sofia");
-// console.log(vegStore.loadingVegetables(["Okra 2.5 3.5", "Beans 10 2.8", "Celery 5.5 2.2", "Celery 0.5 2.5"]));
-// console.log(vegStore.buyingVegetables(["Okra 1"]));
-// console.log(vegStore.buyingVegetables(["Beans 8", "Okra 1.5"]));
-// console.log(vegStore.buyingVegetables(["Banana 1", "Beans 2"]));
-
-// let vegStore = new VegetableStore("Jerrie Munro", "1463 Pette Kyosheta, Sofia");
-// console.log(vegStore.loadingVegetables(["Okra 2.5 3.5", "Beans 10 2.8", "Celery 5.5 2.2", "Celery 0.5 2.5"]));
-// console.log(vegStore.rottingVegetable("Okra", 1));
-// console.log(vegStore.rottingVegetable("Okra", 2.5));
-// console.log(vegStore.buyingVegetables(["Beans 8", "Okra 1.5"]));
-
-let vegStore = new VegetableStore("Jerrie Munro", "1463 Pette Kyosheta, Sofia");
-console.log(vegStore.loadingVegetables(["Okra 2.5 3.5", "Beans 10 2.8", "Celery 5.5 2.2", "Celery 0.5 2.5"]));
-console.log(vegStore.rottingVegetable("Okra", 1));
-console.log(vegStore.rottingVegetable("Okra", 2.5));
-console.log(vegStore.buyingVegetables(["Beans 8", "Celery 1.5"]));
-console.log(vegStore.revision());
