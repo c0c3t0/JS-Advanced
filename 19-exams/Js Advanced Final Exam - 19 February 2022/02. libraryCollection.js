@@ -42,19 +42,18 @@ class LibraryCollection {
 
     getStatistics(bookAuthor) {
         if (!bookAuthor) {
-            let result = `The book collection has ${this.capacity - this.books.length} empty spots left.\n`;
-            this.books.sort((a, b) => a['bookName'].localeCompare(b['bookName']))
-                .map(book => { result += `${book.bookName} == ${book.bookAuthor} - ${book.payed ? 'Has Paid' : 'Not Paid'}.\n` })
-
-            return result.trim();
-        } else {
-            if (!this.books.find(book => book.bookAuthor === bookAuthor)) {
-                throw new Error(`${bookAuthor} is not in the collection.`);
-            }
-            let result = '';
-            this.books.filter(book => book.bookAuthor === bookAuthor)
-                .map(book => { result += `${book['bookName']} == ${book.bookAuthor} - ${book.payed ? 'Has Paid' : 'Not Paid'}.\n` });
-            return result.trim();
+            let result = [`The book collection has ${this.capacity - this.books.length} empty spots left.`];
+            this.books.sort((a, b) => a.bookName.localeCompare(b.bookName))
+                .map(x => result.push(`${x.bookName} == ${x.bookAuthor} - ${x.payed ? 'Has Paid' : 'Not Paid'}.`))
+            return result.join('\n');
         }
+        const book = this.books.find(x => x.bookAuthor === bookAuthor);
+        if (!book) {
+            throw new Error(`${bookAuthor} is not in the collection.`);
+        }
+        let result = [];
+        this.books.filter(x => x.bookAuthor === bookAuthor)
+            .map(x => { result.push(`${x.bookName} == ${x.bookAuthor} - ${x.payed ? 'Has Paid' : 'Not Paid'}.`) });
+        return result.join('\n');
     }
 }
