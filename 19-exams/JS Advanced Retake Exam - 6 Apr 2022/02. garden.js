@@ -71,7 +71,7 @@ class Garden {
             result += "Plants in storage: The storage is empty.";
         } else {
             result += 'Plants in storage: ';
-            let harvested = []
+            let harvested = [];
             for (let info of this.storage) {
                 harvested.push(`${info[0]} (${info[1]})`)
             }
